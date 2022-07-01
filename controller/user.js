@@ -111,7 +111,7 @@ exports.deleteUser = async (req, res, next) => {
           })
         }
         // 查找并删除用户
-        const data = await User.findById(id)
+        const data = await User.findByIdAndDelete(id)
         if(!data){
           return res.status(400).json({
             code:400,
