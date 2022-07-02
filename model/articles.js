@@ -40,7 +40,7 @@ const articleSchema = new mongooes.Schema({
         ref: 'User',
         require: true
     }
-})
+},{timestamps: true})
 
 // 创建modle
 const Article = mongooes.model('atricle',articleSchema)
