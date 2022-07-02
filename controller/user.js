@@ -1,5 +1,6 @@
 //引入User模型
 const { User } = require('../model/user')
+const { Article } = require('../model/articles')
 
 //使用bcrypt进行密码加密
 const bcrypt = require('bcrypt')
@@ -110,8 +111,13 @@ exports.deleteUser = async (req, res, next) => {
             msg:'请传入_id'
           })
         }
-        // 查找并删除用户
+        // 查找并删除用户,将该用户的文章也删除
         const data = await User.findByIdAndDelete(id)
+
+        //删除用户的文章
+        const data_art = await Article.remove({
+          author: id
+        })
         if(!data){
           return res.status(400).json({
             code:400,
